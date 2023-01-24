@@ -16,47 +16,47 @@ const questions = [
     {
         name: 'content',
         message: 'Enter main title description:'
-    },
-    {
-        name: 'content',
-        message: 'Enter application description:'
-    },
-    {
-        name: 'content',
-        message: 'Enter table of contents'
-    },
-    {
-        name: 'content',
-        message: 'Enter install instructions:'
-    },
-    {
-        name: 'content',
-        message: 'Enter usage instructions:'
-    },
-      {
-        name: 'content',
-        message: 'Enter credits for you application:'
-    },
-      {
-        name: 'content',
-        message: 'Enter the license type:'
-    },
-      {
-        name: 'content',
-        message: 'Enter badges details:'
-    },
-    {
-        name: 'content',
-        message: 'Enter the features of the application:'
-    },
-    {
-        name: 'content',
-        message: 'Enter details on how to contribute:'
-    },
-    {
-        name: 'content',
-        message: 'Enter any testing that was performed:'
-    },
+    }
+    // {
+    //     name: 'content',
+    //     message: 'Enter application description:'
+    // },
+    // {
+    //     name: 'content',
+    //     message: 'Enter table of contents'
+    // },
+    // {
+    //     name: 'content',
+    //     message: 'Enter install instructions:'
+    // },
+    // {
+    //     name: 'content',
+    //     message: 'Enter usage instructions:'
+    // },
+    // {
+    //     name: 'content',
+    //     message: 'Enter credits for you application:'
+    // },
+    // {
+    //     name: 'content',
+    //     message: 'Enter the license type:'
+    // },
+    // {
+    //     name: 'content',
+    //     message: 'Enter badges details:'
+    // },
+    // {
+    //     name: 'content',
+    //     message: 'Enter the features of the application:'
+    // },
+    // {
+    //     name: 'content',
+    //     message: 'Enter details on how to contribute:'
+    // },
+    // {
+    //     name: 'content',
+    //     message: 'Enter any testing that was performed:'
+    // },
 ];
 
 // function to write README file
@@ -88,11 +88,15 @@ function writeToFile(data) {
 
 function promptTheUser() {
     console.log('##############################');
-    // questions.forEach(element => {
-    //     console.log(`Questions array contains: ${element}`);
-        inquirer.prompt(questions).then(writeToFile);
+    for (var question of questions) {
+    //     console.log('Questions array contains:' + question);
+    //     console.log('Questions array contains:' + questions[1]);
+        inquirer.prompt(question)
+            .then(await (writeToFile));
+        
+        // inquirer.prompt(questions).then(writeToFile);
         // .then(promptTheUser);
-    // }); 
+    }; 
     
 };
 
