@@ -5,66 +5,126 @@ const generateMarkdown = require("./utils/generateMarkdown");
 
 var usrFileName = '';
 var ansCnt = 1;
+var qIndex = 0;
 
 // array of questions for user
 const questions = [
     {
         name: 'file_name',
         message: 'What would you like the filename to be?',
-        default: 'README.md'
+        default: './gen-readme/README.md'
     },
     {
         name: 'content',
-        message: 'Enter main title description:'
+        message: 'Enter main title section heading:',
+        default: 'BIG TITLE'
+    },
+    {
+        name: 'content',
+        message: 'Enter application description section heading:',
+        default: 'Description'
+    },
+    {
+        name: 'content',
+        message: 'Enter application description:'
+    },
+    {
+        name: 'content',
+        message: 'Enter table of contents',
+        default: 'Table of Contents'
+    },
+    {
+        name: 'content',
+        message: 'Enter install instructions section heading:',
+        default: 'Installation'
+    },
+    {
+        name: 'content',
+        message: 'Enter install instructions:'
+    },
+    {
+        name: 'content',
+        message: 'Enter usage instructions section heading:',
+        default: 'Usage'
+    },
+    {
+        name: 'content',
+        message: 'Enter usage instructions:'
+    },
+    {
+        name: 'content',
+        message: 'Enter credits section heading:',
+        default: 'Credits'
+    },
+    {
+        name: 'content',
+        message: 'Enter credits for you application:'
+    },
+    {
+        name: 'content',
+        message: 'Enter license section heading:',
+        default: 'Licenses'
+    },
+    {
+        name: 'content',
+        message: 'Enter the license type:'
+    },
+    {
+        name: 'content',
+        message: 'Enter badges section heading:',
+        default: 'Badges'
+    },
+    {
+        name: 'content',
+        message: 'Enter badges details:'
+    },
+    {
+        name: 'content',
+        message: 'Enter application features section heading:',
+        default: 'Features'
+    },
+    {
+        name: 'content',
+        message: 'Enter the features of the application:'
+    },
+    {
+        name: 'content',
+        message: 'Enter contribute section heading:',
+        default: 'How To Contribute'
+    },
+    {
+        name: 'content',
+        message: 'Enter details on how to contribute:'
+    },
+    {
+        name: 'content',
+        message: 'Enter testing section heading:',
+        default: 'Tests'
+    },
+    {
+        name: 'content',
+        message: 'Enter any testing that was performed:'
     }
-    // {
-    //     name: 'content',
-    //     message: 'Enter application description:'
-    // },
-    // {
-    //     name: 'content',
-    //     message: 'Enter table of contents'
-    // },
-    // {
-    //     name: 'content',
-    //     message: 'Enter install instructions:'
-    // },
-    // {
-    //     name: 'content',
-    //     message: 'Enter usage instructions:'
-    // },
-    // {
-    //     name: 'content',
-    //     message: 'Enter credits for you application:'
-    // },
-    // {
-    //     name: 'content',
-    //     message: 'Enter the license type:'
-    // },
-    // {
-    //     name: 'content',
-    //     message: 'Enter badges details:'
-    // },
-    // {
-    //     name: 'content',
-    //     message: 'Enter the features of the application:'
-    // },
-    // {
-    //     name: 'content',
-    //     message: 'Enter details on how to contribute:'
-    // },
-    // {
-    //     name: 'content',
-    //     message: 'Enter any testing that was performed:'
-    // },
 ];
+
+function filterForMarkd(input) {
+
+    switch(input) {
+        case 'main title':
+            return utils.h(1, input);
+        case 'heading':
+            return utils.h(2, input);
+        case 'default': 
+            return 'nothing';
+    }
+};
 
 // function to write README file
 function writeToFile(data) {
 
     console.log('In writeToFile Func');
 
-    if (ansCnt === 1) {
+    if (ansCnt == 1) {
         console.log('Inside if statement for creating file');
         console.log(`Data contains: ${data.file_name}`);
         console.log(`Data contains: ${data.content}`);
@@ -78,9 +138,9 @@ function writeToFile(data) {
     } else {
         console.log('Inside if statement for adding info to file');
 
-        return fs.writeFile(usrFileName, data.content)
+        return fs.appendFile(usrFileName, `${data.content}\n`)
         .then(() => {
-            console.log(`Writing to file (${fileName})`);
+            console.log(`Writing to file (${usrFileName})`);
             console.log(`And the contents is:\n${data.content}`);
         });
     }
@@ -88,16 +148,12 @@ function writeToFile(data) {
 
 function promptTheUser() {
     console.log('##############################');
-    for (var question of questions) {
-    //     console.log('Questions array contains:' + question);
-    //     console.log('Questions array contains:' + questions[1]);
-        inquirer.prompt(question)
-            .then(await (writeToFile));
-        
-        // inquirer.prompt(questions).then(writeToFile);
-        // .then(promptTheUser);
-    }; 
-    
+        inquirer.prompt(questions[qIndex])
+            .then(writeToFile)
+            .then( data => {
+                qIndex++;
+                promptTheUser();
+            });
 };
 
 function cycleUserPrompts() {
@@ -109,10 +165,13 @@ function cycleUserPrompts() {
             message: 'Would you like to generate a git Readme file?'
         }  
     ]).then(data => {
+
         if (data.choice) {
             return promptTheUser();
         };
+
         console.log('Thanks for using our app!\n');
+
     });
 };
 
