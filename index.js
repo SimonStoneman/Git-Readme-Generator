@@ -25,10 +25,12 @@ const questions = [
         default: 'Description'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter application description:'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter table of contents',
         default: 'Table of Contents'
@@ -39,6 +41,7 @@ const questions = [
         default: 'Installation'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter install instructions:'
     },
@@ -48,6 +51,7 @@ const questions = [
         default: 'Usage'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter usage instructions:'
     },
@@ -57,6 +61,7 @@ const questions = [
         default: 'Credits'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter credits for you application:'
     },
@@ -66,6 +71,7 @@ const questions = [
         default: 'Licenses'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter the license type:'
     },
@@ -75,6 +81,7 @@ const questions = [
         default: 'Badges'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter badges details:'
     },
@@ -84,6 +91,7 @@ const questions = [
         default: 'Features'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter the features of the application:'
     },
@@ -93,6 +101,7 @@ const questions = [
         default: 'How To Contribute'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter details on how to contribute:'
     },
@@ -102,6 +111,7 @@ const questions = [
         default: 'Tests'
     },
     {
+        type: 'editor',
         name: 'content',
         message: 'Enter any testing that was performed:'
     }
