@@ -18,13 +18,13 @@ const questions = [
         name: 'content',
         message: 'Enter main title section heading:',
         default: 'BIG TITLE',
-        markupType: 'h1'
+        markupType: 'H1'
     },
     {
         name: 'content',
         message: 'Enter application description section heading:',
         default: 'Description',
-        markupType: 'h2'
+        markupType: 'H2'
     },
     {
         type: 'editor',
@@ -41,7 +41,7 @@ const questions = [
         name: 'content',
         message: 'Enter install instructions section heading:',
         default: 'Installation',
-        markupType: 'h2'
+        markupType: 'H2'
     },
     {
         type: 'editor',
@@ -52,7 +52,7 @@ const questions = [
         name: 'content',
         message: 'Enter usage instructions section heading:',
         default: 'Usage',
-        markupType: 'h2'
+        markupType: 'H2'
     },
     {
         type: 'editor',
@@ -63,7 +63,7 @@ const questions = [
         name: 'content',
         message: 'Enter credits section heading:',
         default: 'Credits',
-        markupType: 'h2'
+        markupType: 'H2'
     },
     {
         type: 'editor',
@@ -74,7 +74,7 @@ const questions = [
         name: 'content',
         message: 'Enter license section heading:',
         default: 'Licenses',
-        markupType: 'h2'
+        markupType: 'H2'
     },
     {
         type: 'editor',
@@ -85,7 +85,7 @@ const questions = [
         name: 'content',
         message: 'Enter badges section heading:',
         default: 'Badges',
-        markupType: 'h2'
+        markupType: 'H2'
     },
     {
         type: 'editor',
@@ -96,7 +96,7 @@ const questions = [
         name: 'content',
         message: 'Enter application features section heading:',
         default: 'Features',
-        markupType: 'h2'
+        markupType: 'H2'
     },
     {
         type: 'editor',
@@ -107,7 +107,7 @@ const questions = [
         name: 'content',
         message: 'Enter contribute section heading:',
         default: 'How To Contribute',
-        markupType: 'h2'
+        markupType: 'H2'
     },
     {
         type: 'editor',
@@ -118,7 +118,7 @@ const questions = [
         name: 'content',
         message: 'Enter testing section heading:',
         default: 'Tests',
-        markupType: 'h2'
+        markupType: 'H2'
     },
     {
         type: 'editor',
@@ -160,7 +160,11 @@ function writeToFile(data) {
         
         console.log(questions[qIndex].markupType);
 
-        return fs.appendFile(usrFileName, `${data.content}\n`)
+        let markdFormated = generateMarkdown(data.content, questions[qIndex].markupType);
+
+        // console.log(markdFormated)
+
+        return fs.appendFile(usrFileName, `${markdFormated}\n`)
         .then(() => {
             console.log(`Writing to file (${usrFileName})`);
             console.log(`And the contents is:\n${data.content}`);
